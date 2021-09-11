@@ -9,11 +9,26 @@ import re
 
 print('Gathering PMU info\n---------------------------------------------')
 
+date = input("Please enter a date: (format ddmmyyyy) ")
+
+
+def check_date(d):
+    pattern = re.compile("^[0-3][0-9][0-1][0-9][0-9][0-9][0-9][0-9]$")
+    if not d:
+        return d
+    while not pattern.match(d):
+        d = input("Please enter a date: (format ddmmyyyy) ")
+    return f'{d}/'
+
+
+date = check_date(date)
+
 delay = 3
 opts = FirefoxOptions()
 opts.add_argument("--headless")
 browser = webdriver.Firefox(options=opts)
-browser.get("https://www.pmu.fr/turf/")  # get runs of the day
+print(f"https://www.pmu.fr/turf/{date}")
+browser.get(f"https://www.pmu.fr/turf/{date}")  # get runs of the day
 
 WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, '.WelcomeStep__DiscardButton-sc-18c5grd-0'))).click()  # popup cookies
 for i in range(3):

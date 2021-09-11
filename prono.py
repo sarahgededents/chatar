@@ -22,4 +22,5 @@ for c in range(len(horses_info)):
 for np in scrap.nstart:  # if the horse is a non-starter, horse_score = 0 to ignore him
     h_score[np] = 0
 print("=============================================")
-print(f'Pronostic Quinté: {list(dict(sorted(h_score.items(), key=lambda item: item[1], reverse=True)).keys())}')
+prono = list(dict(sorted(h_score.items(), key=lambda item: item[1], reverse=True)).keys())
+print(f'Pronostic Quinté: {prono}')

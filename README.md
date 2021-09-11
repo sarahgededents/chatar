@@ -1,7 +1,9 @@
-# Get automated prono for Quinté horse bets based on PMU
+# Get automated prono for Quinté horse bets based on PMU info
 
-🚀 Install *selenium* dependencie with ```pip install selenium```, then add required drivers to your system path (*geckodriver* here).
+🚀 Install *selenium* dependency with ```pip install selenium```, then add required drivers to your system path (*geckodriver* here).
 
-To get the prono, execute the following command: ```python main.py```.
+Create *id.txt* (email,pwd,name) and *emails.txt* (email1,email2,...,emailn) files.
 
-You should execute this code before the quinté of the day starts.
+To get the prono by email, execute the following command: ```python sender.py```.
+
+The PMU must have published info about the run... So, don't be surprised if it crashes...
