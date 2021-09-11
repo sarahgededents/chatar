@@ -1,0 +1,5 @@
+id.txt
+emails.txt
+geckodriver.log
+venv/
+.idea/
