@@ -1,19 +1,25 @@
 import datetime
 import scrap
 
-infos_chev = scrap.infos_cheval
+horses_info = scrap.horse_info
 
-score_cheval = {}
+h_score = {}
 
-for c in range(len(infos_chev)):
-    cheval_info = infos_chev[c+1]
-    s1 = (cheval_info['nwin'] + 0.7 * cheval_info['npodium']) / cheval_info['total']
-    s2_etap = 0
-    n_course = len(cheval_info['past_run'])
-    for r in range(n_course):
-        run_info = cheval_info['past_run'][f'course{r+1}']
-        s2_etap += (1 - (datetime.datetime.today().date() - run_info['date']).days / 365) * (1 - (run_info['arrivee'] - 1) / run_info['partants']) if run_info['arrivee'] != 0 else 0
-    s2 = s2_etap / n_course
-    score_cheval[c+1] = (s1 + s2) / 2
-print(score_cheval)
-print(list(dict(sorted(score_cheval.items(), key=lambda item: item[1], reverse=True)).keys())[:3])
+for c in range(len(horses_info)):
+    h_info = horses_info[c+1]
+    s1 = (h_info['n_victory'] + 0.7 * h_info['n_podium']) / h_info['n_runs']
+    s2_step = 0
+    nrun = len(h_info['past_runs'])
+    for r in range(nrun):
+        run_info = h_info['past_runs'][f'r{r+1}']
+        ratio = 1 - (datetime.datetime.today().date() - run_info['date']).days / 365
+        if ratio < 0:  # if run was before a year ago
+            ratio = 0
+        s2_step += ratio * (1 - (run_info['rank'] - 1) / run_info['n_starters']) if run_info['rank'] != 0 else 0
+    s2 = s2_step / nrun
+    h_score[c+1] = (s1 + s2) / 2
+#print(h_score)
+for np in scrap.nstart:  # if the horse is a non-starter, horse_score = 0 to ignore him
+    h_score[np] = 0
+print("=============================================")
+print(f'Pronostic Quinté: {list(dict(sorted(h_score.items(), key=lambda item: item[1], reverse=True)).keys())}')
