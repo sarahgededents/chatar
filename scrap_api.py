@@ -71,6 +71,7 @@ if datetime.datetime.strptime(date, "%d%m%Y") > datetime.datetime.fromtimestamp(
             print(f'Pronostic Réunion {numReu}, Course {numCourse}: {prono}')
     except:
         data = False
+        prono = True
         print("No available data at the moment.")
 
 else:
