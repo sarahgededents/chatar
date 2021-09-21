@@ -23,7 +23,7 @@ def check_date(d):
 
 date = check_date(date)
 
-delay = 3
+delay = 5
 opts = FirefoxOptions()
 opts.add_argument("--headless")
 browser = webdriver.Firefox(options=opts)

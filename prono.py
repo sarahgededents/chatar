@@ -16,7 +16,10 @@ for c in range(len(horses_info)):
         if ratio < 0:  # if run was before a year ago
             ratio = 0
         s2_step += ratio * (1 - (run_info['rank'] - 1) / run_info['n_starters']) if run_info['rank'] != 0 else 0
-    s2 = s2_step / nrun
+    if nrun == 0:  # TODO understand why this happens even if there are races... (bad XPATH?)
+        s2 = 0
+    else:
+        s2 = s2_step / nrun
     h_score[c+1] = (s1 + s2) / 2
 #print(h_score)
 for np in scrap.nstart:  # if the horse is a non-starter, horse_score = 0 to ignore him
